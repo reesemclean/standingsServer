@@ -11,15 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160515004014) do
+ActiveRecord::Schema.define(version: 20160515020050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "teams", force: :cascade do |t|
+  create_table "leagues", force: :cascade do |t|
     t.string   "name"
+    t.boolean  "permits_ties", default: true
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "result_participants", force: :cascade do |t|
+    t.integer  "status",     default: 0
+    t.integer  "result_id"
+    t.integer  "team_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["result_id"], name: "index_result_participants_on_result_id", using: :btree
+    t.index ["team_id"], name: "index_result_participants_on_team_id", using: :btree
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.datetime "date"
+    t.integer  "league_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_results_on_league_id", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "league_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_teams_on_league_id", using: :btree
   end
 
 end

@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+league = League.create({name: 'League name'})
+
+team = Team.create({name: 'Team name'})
+team.league = league
+
+result = Result.create({date: Date.today})
+
+resultParticipant = ResultParticipant.create({})
+resultParticipant.result = result
+resultParticipant.team = team
+resultParticipant.status = :lost

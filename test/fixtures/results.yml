@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  league: one
+  winning_teams: one
+  losing_teams: one
+  tied_teams: one
+  date: 2016-05-14
+
+two:
+  league: two
+  winning_teams: two
+  losing_teams: two
+  tied_teams: two
+  date: 2016-05-14

@@ -1,21 +1,22 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :update, :destroy]
 
-  # GET /teams
+  # GET /leagues/:league_id/teams
   def index
-    @teams = Team.all
+    @teams = Team.where(league_id: params[:league_id])
 
     render json: @teams
   end
 
   # GET /teams/1
   def show
+    @team = Team.find(params[:id])
     render json: @team
   end
 
-  # POST /teams
+  # POST /leagues/:league_id/teams
   def create
     @team = Team.new(team_params)
+    @team.league_id = params[:league_id]
 
     if @team.save
       render json: @team, status: :created, location: @team
@@ -26,6 +27,8 @@ class TeamsController < ApplicationController
 
   # PATCH/PUT /teams/1
   def update
+    @team = Team.find(params[:id])
+
     if @team.update(team_params)
       render json: @team
     else
@@ -35,17 +38,16 @@ class TeamsController < ApplicationController
 
   # DELETE /teams/1
   def destroy
+    @team = Team.find(params[:id])
+
     @team.destroy
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
     # Only allow a trusted parameter "white list" through.
     def team_params
-      params.require(:team).permit(:name)
+      params.require(:team).permit(:name, :league_id)
     end
 end

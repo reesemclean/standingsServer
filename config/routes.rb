@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :teams
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :leagues do
+    resources :results, shallow: true
+    resources :teams, shallow: true
+  end
 end

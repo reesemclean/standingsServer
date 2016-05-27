@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  league: one
+  permitsTies: false
 
 two:
   name: MyString
-  league: two
+  permitsTies: false

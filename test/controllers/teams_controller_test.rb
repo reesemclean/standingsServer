@@ -12,7 +12,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create team" do
     assert_difference('Team.count') do
-      post teams_url, params: { team: { name: @team.name } }
+      post teams_url, params: { team: { league_id: @team.league_id, name: @team.name } }
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update team" do
-    patch team_url(@team), params: { team: { name: @team.name } }
+    patch team_url(@team), params: { team: { league_id: @team.league_id, name: @team.name } }
     assert_response 200
   end
 
