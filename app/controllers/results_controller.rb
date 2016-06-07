@@ -65,6 +65,9 @@ class ResultsController < ApplicationController
         end
       }
 
+      affectedTeams = participants_to_save.collect(&:team)
+      ResultMailer.result_email(affectedTeams).deliver_now
+
       render json: @result, status: :created, location: @result
     end
 
